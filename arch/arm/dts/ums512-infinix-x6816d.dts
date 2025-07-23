@@ -7,6 +7,7 @@
 
 #include "ums512.dtsi"
 #include "sc2730.dtsi"
+#include <dt-bindings/gpio/gpio.h>
 
 / {
 	model = "Infinix HOT 12 Play NFC";
