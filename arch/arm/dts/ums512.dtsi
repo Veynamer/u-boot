@@ -183,21 +183,17 @@
 			interrupts = <GIC_PPI 9 IRQ_TYPE_LEVEL_HIGH>;
 		};
 
-		ap_ahb_regs: syscon@20100000 {
-			compatible = "sprd,ums512-glbregs", "syscon",
-				     "simple-mfd";
-			reg = <0 0x20100000 0 0x4000>;
+		ap_apb_regs: syscon@71000000 {
+			compatible = "sprd,ums512-glbregs", "syscon", "simple-mfd";
+			reg = <0 0x71000000 0 0x3000>;
 			#address-cells = <1>;
 			#size-cells = <1>;
-			ranges = <0 0 0x20100000 0x4000>;
+			ranges = <0 0 0x71000000 0x3000>;
 
-			apahb_gate: clock-controller@0 {
-				compatible = "sprd,ums512-apahb-gate";
+			apapb_gate: clock-controller@0 {
+				compatible = "sprd,ums512-apapb-gate";
 				reg = <0x0 0x3000>;
-				clocks = <&ext_26m>;
-				clock-names = "ext-26m";
 				#clock-cells = <1>;
-				#reset-cells = <1>;
 			};
 		};
 
@@ -393,10 +389,31 @@
 		clock-output-names = "ext-32k";
 	};
 
+	ext_4m: clk-4m {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <4000000>;
+		clock-output-names = "ext-4m";
+	};
+
 	rco_100m: clk-100m {
 		compatible = "fixed-clock";
 		#clock-cells = <0>;
 		clock-frequency = <100000000>;
 		clock-output-names = "rco-100m";
+	};
+
+	dphy_273m: dphy-273m {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <273000000>;
+		clock-output-names = "dphy-273m";
+	};
+
+	dphy_204m8: dphy-204m8 {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-frequency = <204800000>;
+		clock-output-names = "dphy-204m8";
 	};
 };
