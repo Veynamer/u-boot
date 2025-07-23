@@ -32,9 +32,9 @@
 
 		stdout-path = "serial1:115200n8";
 
-		framebuffer@9e000000 {
+		framebuffer@9d000000 {
 			compatible = "simple-framebuffer";
-			reg = <0x0 0x9e000000 0x0 (720 * 1640 * 4)>;
+			reg = <0x0 0x9d000000 0x0 (720 * 1640 * 4)>;
 			width = <720>;
 			height = <1640>;
 			stride = <(720 * 4)>;
