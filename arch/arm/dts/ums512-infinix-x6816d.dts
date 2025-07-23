@@ -1,0 +1,107 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+/*
+ * Copyright (C) TODO
+ */
+
+/dts-v1/;
+
+#include "ums512.dtsi"
+#include "sc2730.dtsi"
+
+/ {
+	model = "Infinix HOT 12 Play NFC";
+
+	compatible = "infinix,x6816d", "sprd,ums512";
+
+	aliases {
+		serial0 = &uart0;
+		serial1 = &uart1;
+	};
+
+	memory@80000000 {
+		device_type = "memory";
+		reg = <0x0 0x80000000 0x1 0xfffff000>;
+	};
+
+	chosen {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+
+		stdout-path = "serial1:115200n8";
+
+		framebuffer@9e000000 {
+			compatible = "simple-framebuffer";
+			reg = <0x0 0x9e000000 0x0 (720 * 1640 * 4)>;
+			width = <720>;
+			height = <1640>;
+			stride = <(720 * 4)>;
+			format = "a8r8g8b8";
+		};
+	};
+
+	bat: battery {
+		compatible = "simple-battery";
+		charge-full-design-microamp-hours = <5960000>;
+		charge-term-current-microamp = <180000>;
+		constant-charge-voltage-max-microvolt = <4400000>;
+		constant-charge-current-max-microamp = <2000000>;
+		voltage-min-design-microvolt = <3450000>;
+		voltage-max-design-microvolt = <4340000>;
+		factory-internal-resistance-micro-ohms = <130000>;
+		resistance-temp-table = <45 77>, <25 100>, <10 546>,
+					<0 769>, <(-10) 892>, <(-20) 923>;
+		ocv-capacity-celsius = <20>;
+		ocv-capacity-table-0 = <4342104 100>, <4323024 95>,
+				       <4265840 90>, <4191992 85>,
+				       <4142032 80>, <4082680 75>,
+				       <4040480 70>, <3986216 65>,
+				       <3941512 60>, <3890168 55>,
+				       <3853000 50>, <3825648 45>,
+				       <3805040 40>, <3787760 35>,
+				       <3775920 30>, <3767088 25>,
+				       <3750960 20>, <3725168 15>,
+				       <3693000 10>, <3675000 5>,
+				       <3400000 0>;
+        };
+
+	gpio-keys {
+		compatible = "gpio-keys";
+		key-power {
+			wakeup-source;
+			debounce-interval = <2>;
+			gpios = <&pmic_eic 1 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_POWER>;
+		};
+
+		key-volumeup {
+			wakeup-source;
+			debounce-interval = <2>;
+			gpios = <&ap_gpio 124 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_VOLUMEUP>;
+		};
+
+		key-volumedown {
+			wakeup-source;
+			debounce-interval = <2>;
+			gpios = <&pmic_eic 4 GPIO_ACTIVE_HIGH>;
+			linux,code = <KEY_VOLUMEDOWN>;
+		};
+	};
+};
+
+&sdio0 {
+	status = "okay";
+};
+
+&sdio3 {
+	status = "okay";
+};
+
+&uart0 {
+	status = "okay";
+};
+
+&uart1 {
+	status = "okay";
+};

@@ -9,8 +9,8 @@ config SYS_LOAD_ADDR
 choice
 	prompt "Unisoc target SoC"
 
-config TARGET_UMS9230
-	bool "UMS9230 (T606/T612/T616)"
+config TARGET_UMS512
+	bool "UMS512 (T610/T618/T700)"
 	select ARM64
 
 endchoice
@@ -24,10 +24,10 @@ config SYS_VENDOR
 
 config SYS_BOARD
 	string "Board name"
-	default "ums9230" if TARGET_UMS9230
+	default "ums512" if TARGET_UMS512
 
 config SYS_CONFIG_NAME
 	string "Board configuration name"
-	default "ums9230" if TARGET_UMS9230
+	default "ums512" if TARGET_UMS512
 
 endif

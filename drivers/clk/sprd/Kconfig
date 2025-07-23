@@ -8,6 +8,13 @@ config CLK_SPRD
 
 if CLK_SPRD
 
+config SPRD_UMS512_CLK
+	bool "Unisoc UMS512 clock support"
+	default TARGET_UMS512
+	help
+	  This enables support for the clock controllers found in the
+	  Unisoc UMS512 SoC.
+
 config SPRD_UMS9230_CLK
 	bool "Unisoc UMS9230 clock support"
 	default TARGET_UMS9230
