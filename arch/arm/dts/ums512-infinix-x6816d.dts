@@ -67,25 +67,23 @@
 
 	gpio-keys {
 		compatible = "gpio-keys";
-		key-power {
-			wakeup-source;
-			debounce-interval = <2>;
-			gpios = <&pmic_eic 1 GPIO_ACTIVE_LOW>;
-			linux,code = <KEY_POWER>;
-		};
 
-		key-volumeup {
-			wakeup-source;
-			debounce-interval = <2>;
+		key-vol-up {
+			label = "Volume Up";
+			linux,code = <KEY_UP>;
 			gpios = <&ap_gpio 124 GPIO_ACTIVE_LOW>;
-			linux,code = <KEY_VOLUMEUP>;
 		};
 
-		key-volumedown {
-			wakeup-source;
-			debounce-interval = <2>;
+		key-vol-dowm {
+			label = "Volume Down";
+			linux,code = <KEY_DOWN>;
 			gpios = <&pmic_eic 4 GPIO_ACTIVE_HIGH>;
-			linux,code = <KEY_VOLUMEDOWN>;
+		};
+
+		key-power {
+			label = "Power";
+			linux,code = <KEY_POWER>;
+			gpios = <&pmic_eic 1 GPIO_ACTIVE_LOW>;
 		};
 	};
 };
