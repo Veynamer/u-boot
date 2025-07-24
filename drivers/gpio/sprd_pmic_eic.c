@@ -94,10 +94,9 @@ static int sprd_pmic_eic_probe(struct udevice *dev)
 	}
 
 	priv->map = syscon_get_regmap(dev->parent);
-	if (!priv->map) {
-		dev_err(dev, "Failed to get regmap from parent\n");
-		return -ENODEV;
-	}
+	if (IS_ERR(priv->map))
+		return PTR_ERR(priv->map);
+	
 
 	uc_priv->gpio_count = SPRD_PMIC_EIC_NR;
 	uc_priv->bank_name = dev_read_string(dev, "gpio-bank-name");
