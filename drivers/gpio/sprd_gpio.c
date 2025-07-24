@@ -3,15 +3,16 @@
  * Spreadtrum GPIO driver U-Boot
  */
 
-#include <common.h>
 #include <dm.h>
-#include <dm/device_compat.h>
-#include <dm/lists.h>
-#include <dm/uclass.h>
-#include <dm/gpio.h>
-#include <asm/io.h>
+#include <errno.h>
+#include <fdtdec.h>
+#include <malloc.h>
 #include <linux/bitops.h>
-#include <linux/errno.h>
+#include <linux/io.h>
+#include <asm/io.h>
+#include <asm/gpio.h>
+#include <dm/device-internal.h>
+#include <dt-bindings/gpio/gpio.h>
 
 /* GPIO registers offset */
 #define SPRD_GPIO_DATA     0x00

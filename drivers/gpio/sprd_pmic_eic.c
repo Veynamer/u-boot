@@ -3,15 +3,16 @@
  * Spreadtrum SC2731 PMIC EIC GPIO driver U-Boot
  */
 
-#include <common.h>
 #include <dm.h>
-#include <dm/device.h>
-#include <dm/uclass.h>
-#include <dm/device_compat.h>
+#include <errno.h>
+#include <fdtdec.h>
+#include <malloc.h>
 #include <linux/bitops.h>
-#include <dm/gpio.h>
-#include <syscon.h>
-#include <regmap.h>
+#include <linux/io.h>
+#include <asm/io.h>
+#include <asm/gpio.h>
+#include <dm/device-internal.h>
+#include <dt-bindings/gpio/gpio.h>
 
 /* PMIC EIC Registers */
 #define SPRD_PMIC_EIC_DATA    0x00

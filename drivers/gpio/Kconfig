@@ -420,12 +420,6 @@ config SPRD_GPIO
 	help
 	  Support GPIO device in Unisoc SoCs.
 
-config SPRD_GPIO
-	bool "Enable Spreadtrum GPIO driver"
-	default y
-	help
-	  GPIO controller for Spreadtrum SoCs.
-
 config SPRD_EIC
 	bool "Enable Spreadtrum EIC debounce driver"
 	default y
