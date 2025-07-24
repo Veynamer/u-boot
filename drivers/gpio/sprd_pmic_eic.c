@@ -13,6 +13,8 @@
 #include <asm/gpio.h>
 #include <dm/device-internal.h>
 #include <dt-bindings/gpio/gpio.h>
+#include <regmap.h>
+#include <syscon.h>
 
 /* PMIC EIC Registers */
 #define SPRD_PMIC_EIC_DATA    0x00
@@ -22,8 +24,8 @@
 #define SPRD_PMIC_EIC_BIT(x)  ((x) & (SPRD_PMIC_EIC_NR - 1))
 
 struct sprd_pmic_eic_priv {
-	struct regmap *map;
-	u32 reg_base;
+    void __iomem *reg_base;
+    struct regmap *map;
 };
 
 static int sprd_pmic_eic_update(struct udevice *dev, uint offset,
