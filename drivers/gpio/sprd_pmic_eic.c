@@ -73,7 +73,7 @@ static int sprd_pmic_eic_direction_input(struct udevice *dev, uint offset)
 
 static const struct dm_gpio_ops sprd_pmic_eic_ops = {
 	.request	= sprd_pmic_eic_request,
-	.free		= sprd_pmic_eic_free,
+	.rfree		= sprd_pmic_eic_free,
 	.direction_input = sprd_pmic_eic_direction_input,
 	.get_value	= sprd_pmic_eic_get_value,
 };
@@ -83,13 +83,15 @@ static int sprd_pmic_eic_probe(struct udevice *dev)
 	struct sprd_pmic_eic_priv *priv = dev_get_priv(dev);
 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
 
-	priv->reg_base = dev_read_addr(dev);
-	if (priv->reg_base == FDT_ADDR_T_NONE)
+	priv->reg_base = devfdt_remap_addr(dev);
+	if (!priv->reg_base) {
+		dev_err(dev, "Failed to remap reg_base\n");
 		return -EINVAL;
+	}
 
 	priv->map = syscon_get_regmap(dev->parent);
 	if (!priv->map) {
-		dev_err(dev, "failed to get regmap from parent\n");
+		dev_err(dev, "Failed to get regmap from parent\n");
 		return -ENODEV;
 	}
 
@@ -109,6 +111,5 @@ U_BOOT_DRIVER(sprd_pmic_eic) = {
 	.id	= UCLASS_GPIO,
 	.of_match = sprd_pmic_eic_ids,
 	.probe	= sprd_pmic_eic_probe,
-	.priv_auto_alloc_size = sizeof(struct sprd_pmic_eic_priv),
 	.ops	= &sprd_pmic_eic_ops,
 };

@@ -96,7 +96,7 @@ static int sprd_eic_get_value(struct udevice *dev, u32 offset)
 
 static const struct dm_gpio_ops sprd_eic_ops = {
 	.request		= sprd_eic_request,
-	.free			= sprd_eic_free,
+	.rfree			= sprd_eic_free,
 	.get_value		= sprd_eic_get_value,
 	.direction_input	= sprd_eic_direction_input,
 };
@@ -111,8 +111,8 @@ static int sprd_eic_probe(struct udevice *dev)
 	uc_priv->bank_name = dev_read_string(dev, "gpio-bank-name");
 
 	for (i = 0; i < SPRD_EIC_MAX_BANK; i++) {
-		priv->reg_base[i] = dev_read_addr_index(dev, i);
-		if (priv->reg_base[i] == (void __iomem *)FDT_ADDR_T_NONE)
+		priv->reg_base[i] = devfdt_remap_addr_index(dev, i);
+		if (!priv->reg_base[i])
 			break;
 	}
 
@@ -130,5 +130,4 @@ U_BOOT_DRIVER(eic_sprd) = {
 	.of_match = sprd_eic_ids,
 	.probe	= sprd_eic_probe,
 	.ops	= &sprd_eic_ops,
-	.priv_auto_alloc_size = sizeof(struct sprd_eic_priv),
 };

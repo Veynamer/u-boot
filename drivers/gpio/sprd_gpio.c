@@ -97,7 +97,7 @@ static int sprd_gpio_set_value(struct udevice *dev, u32 offset, int value)
 
 static const struct dm_gpio_ops sprd_gpio_ops = {
 	.request		= sprd_gpio_request,
-	.free			= sprd_gpio_free,
+	.rfree			= sprd_gpio_free,
 	.direction_input	= sprd_gpio_direction_input,
 	.direction_output	= sprd_gpio_direction_output,
 	.get_value		= sprd_gpio_get_value,
@@ -130,5 +130,4 @@ U_BOOT_DRIVER(gpio_sprd) = {
 	.of_match = sprd_gpio_ids,
 	.probe	= sprd_gpio_probe,
 	.ops	= &sprd_gpio_ops,
-	.priv_auto_alloc_size = sizeof(struct sprd_gpio_priv),
 };
