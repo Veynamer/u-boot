@@ -413,6 +413,33 @@ config SUNXI_NEW_PINCTRL
 	The Allwinner D1 and other new SoCs use a different register map
 	for the GPIO block, which we need to know about in the SPL.
 
+config SPRD_GPIO
+	tristate "Spreadtrum GPIO support"
+	depends on ARCH_SPRD
+	depends on DM_GPIO
+	help
+	  Support GPIO device in Unisoc SoCs.
+
+config SPRD_GPIO
+	bool "Enable Spreadtrum GPIO driver"
+	default y
+	help
+	  GPIO controller for Spreadtrum SoCs.
+
+config SPRD_EIC
+	bool "Enable Spreadtrum EIC debounce driver"
+	default y
+	depends on DM_GPIO
+	help
+	  External Interrupt Controller (EIC) with debounce.
+
+config SPRD_PMIC_EIC
+	bool "Enable Spreadtrum PMIC EIC driver"
+	default y
+	depends on DM_GPIO
+	help
+	  GPIO lines from SC2731 PMIC EIC block.
+
 config XILINX_GPIO
 	bool "Xilinx GPIO driver"
 	depends on DM_GPIO

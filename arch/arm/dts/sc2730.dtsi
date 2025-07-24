@@ -45,15 +45,12 @@
 			interrupts = <1>;
 		};
 
-		pmic_eic: gpio@280 {
+		pmic_eic: gpio-controller@280 {
 			compatible = "sprd,sc2730-eic", "sprd,sc2731-eic";
 			reg = <0x280>;
-			interrupt-parent = <&sc2730_pmic>;
-			interrupts = <4>;
 			gpio-controller;
+			gpio-bank-name = "pmic_eic";
 			#gpio-cells = <2>;
-			interrupt-controller;
-			#interrupt-cells = <2>;
 		};
 
 		efuse@300 {

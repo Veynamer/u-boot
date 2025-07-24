@@ -36,6 +36,11 @@ obj-$(CONFIG_RCAR_GPIO)		+= gpio-rcar.o
 obj-$(CONFIG_RZA1_GPIO)		+= gpio-rza1.o
 obj-$(CONFIG_S5P)		+= s5p_gpio.o
 obj-$(CONFIG_SANDBOX_GPIO)	+= sandbox.o sandbox_test.o
+ifdef CONFIG_ARCH_SPRD
+obj-$(CONFIG_SPRD_GPIO)		+= sprd_gpio.o
+obj-$(CONFIG_SPRD_EIC)		+= sprd_eic.o
+obj-$(CONFIG_SPRD_PMIC_EIC)	+= sprd_pmic_eic.o
+endif
 obj-$(CONFIG_TEGRA_GPIO)	+= tegra_gpio.o
 obj-$(CONFIG_TEGRA186_GPIO)	+= tegra186_gpio.o
 obj-$(CONFIG_DA8XX_GPIO)	+= da8xx_gpio.o
