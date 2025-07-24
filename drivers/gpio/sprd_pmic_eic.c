@@ -4,6 +4,7 @@
  */
 
 #include <dm.h>
+#include <log.h>
 #include <errno.h>
 #include <fdtdec.h>
 #include <malloc.h>
@@ -33,10 +34,11 @@ static int sprd_pmic_eic_update(struct udevice *dev, uint offset,
 {
 	struct sprd_pmic_eic_priv *priv = dev_get_priv(dev);
 	u32 bit = BIT(SPRD_PMIC_EIC_BIT(offset));
-	u32 addr = priv->reg_base + reg;
+	u32 addr = (uintptr_t)priv->reg_base + reg;
 
 	return regmap_update_bits(priv->map, addr, bit, value ? bit : 0);
 }
+
 
 static int sprd_pmic_eic_read(struct udevice *dev, uint offset, uint reg)
 {
@@ -44,7 +46,7 @@ static int sprd_pmic_eic_read(struct udevice *dev, uint offset, uint reg)
 	u32 val;
 	int ret;
 
-	ret = regmap_read(priv->map, priv->reg_base + reg, &val);
+	ret = regmap_read(priv->map, (uintptr_t)priv->reg_base + reg, &val);
 	if (ret)
 		return ret;
 
