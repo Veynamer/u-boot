@@ -36,7 +36,7 @@
 
 		framebuffer0: framebuffer@fd708000 {
 			compatible = "simple-framebuffer";
-			reg = <0x0 0xfd708000 0x0 0x01e5a000;
+			reg = <0x0 0xfd708000 0x0 0x01e5a000>;
 			width = <720>;
 			height = <1640>;
 			stride = <(720 * 4)>;
