@@ -88,10 +88,9 @@ static int sprd_pmic_eic_probe(struct udevice *dev)
 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
 
 	priv->reg_base = devfdt_remap_addr(dev);
-	if (!priv->reg_base) {
-		dev_err(dev, "Failed to remap reg_base\n");
-		return -EINVAL;
-	}
+	if (IS_ERR(priv->reg_base))
+		return PTR_ERR(priv->reg_base);
+	
 
 	priv->map = syscon_get_regmap(dev->parent);
 	if (IS_ERR(priv->map))
