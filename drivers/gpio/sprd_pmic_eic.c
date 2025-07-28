@@ -6,6 +6,7 @@
 #include <dm.h>
 #include <log.h>
 #include <errno.h>
+#include <linux/err.h>
 #include <fdtdec.h>
 #include <malloc.h>
 #include <linux/bitops.h>
