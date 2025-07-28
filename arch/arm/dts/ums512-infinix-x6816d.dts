@@ -18,11 +18,13 @@
 	aliases {
 		serial0 = &uart0;
 		serial1 = &uart1;
+		mmc0 = &sdio3
+		mmc1 = &sdio0
 	};
 
 	memory@80000000 {
 		device_type = "memory";
-		reg = <0x0 0x80000000 0x1 0xfffff000>;
+		reg = <0x0 0x80000000 0x0 0x80000000>;
 	};
 
 	chosen {
@@ -30,11 +32,11 @@
 		#size-cells = <2>;
 		ranges;
 
-		stdout-path = "serial1:115200n8";
+		stdout-path = "framebuffer0";
 
-		framebuffer@9e000000 {
+		framebuffer0: framebuffer@fd708000 {
 			compatible = "simple-framebuffer";
-			reg = <0x0 0x9e000000 0x0 0x009e4000>;
+			reg = <0x0 0xfd708000 0x0 0x01e5a000;
 			width = <720>;
 			height = <1640>;
 			stride = <(720 * 4)>;
