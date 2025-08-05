@@ -7,8 +7,6 @@
 
 #include "ums512.dtsi"
 #include "sc2730.dtsi"
-#include <dt-bindings/gpio/gpio.h>
-#include <dt-bindings/input/input.h>
 
 / {
 	model = "Infinix HOT 12 Play NFC";
@@ -32,9 +30,9 @@
 
 		stdout-path = "serial1:115200n8";
 
-		framebuffer@9d000000 {
+		framebuffer@9e000000 {
 			compatible = "simple-framebuffer";
-			reg = <0x0 0x9d000000 0x0 (720 * 1640 * 4)>;
+			reg = <0x0 0x9e000000 0x0 (720 * 1640 * 4)>;
 			width = <720>;
 			height = <1640>;
 			stride = <(720 * 4)>;
@@ -67,27 +65,6 @@
 				       <3400000 0>;
         };
 
-	gpio-keys {
-		compatible = "gpio-keys";
-
-		key-vol-up {
-			label = "Volume Up";
-			linux,code = <KEY_UP>;
-			gpios = <&ap_gpio 124 GPIO_ACTIVE_LOW>;
-		};
-
-		key-vol-dowm {
-			label = "Volume Down";
-			linux,code = <KEY_DOWN>;
-			gpios = <&pmic_eic 4 GPIO_ACTIVE_HIGH>;
-		};
-
-		key-power {
-			label = "Power";
-			linux,code = <KEY_POWER>;
-			gpios = <&pmic_eic 1 GPIO_ACTIVE_LOW>;
-		};
-	};
 };
 
 &sdio0 {
